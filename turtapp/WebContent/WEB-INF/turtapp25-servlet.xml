@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="product1" class="turtapp.domain.Product">
+		<property name="description" value="Samsung Galaxy Young"></property>
+		<property name="price" value="111.55"></property>
+	</bean>
+	<bean id="product2" class="turtapp.domain.Product">
+		<property name="description" value="Samsung Galaxy Note2"></property>
+		<property name="price" value="155.55"></property>
+	</bean>
+	<bean id="product3" class="turtapp.domain.Product">
+		<property name="description" value="Samsung Galaxy Note3"></property>
+		<property name="price" value="187.55"></property>
+	</bean>
+	<bean id="productManager" class="turtapp.service.SimpleProductManager">
+		<property name="products">
+			<list>
+				<ref bean="product1" />
+				<ref bean="product2" />
+				<ref bean="product3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<!-- the application context definition for the turtapp DispatcherServlet -->
+	<bean name="/hello.htm" class="turtapp.web.InventoryController">
+		<property name="productManager" ref="productManager"></property>
+	</bean>
+
+	<bean name="/priceincrease.htm" class="turtapp.web.PriceIncreaseFormController">
+		<property name="sessionForm" value="true" />
+		<property name="commandName" value="priceIncrease" />
+		<property name="commandClass" value="turtapp.service.PriceIncrease" />
+		<property name="validator">
+			<bean class="turtapp.service.PriceIncreaseValidator" />
+		</property>
+		<property name="formView" value="priceincrease" />
+		<property name="successView" value="hello.htm" />
+		<property name="productManager" ref="productManager" />
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>
