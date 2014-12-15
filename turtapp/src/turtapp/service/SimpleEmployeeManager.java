@@ -10,48 +10,43 @@ import turtapp.domain.Employee;
 import turtapp.repository.EmployeeDao;
 
 public class SimpleEmployeeManager implements EmployeeManager {
-	private EmployeeDao mEmployeeDao;
+	private EmployeeDao employeeDao;
 
-	public EmployeeDao getmEmployeeDao() {
-		return mEmployeeDao;
+	public EmployeeDao getEmployeeDao() {
+		return employeeDao;
 	}
 
 	@Autowired
 	@Required
-	public void setmEmployeeDao(EmployeeDao mEmployeeDao) {
-		this.mEmployeeDao = mEmployeeDao;
+	public void setEmployeeDao(EmployeeDao mEmployeeDao) {
+		this.employeeDao = mEmployeeDao;
 	}
 
 	@Override
 	public String getAppraisalRemarks(long empId) throws IOException,
 			SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.getAppraisalRemarks(empId);
 	}
 
 	@Override
 	public String createAppraisalRemarks(long empId, String remarks)
 			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.createAppraisalRemarks(empId, remarks);
 	}
 
 	@Override
 	public String createEmployee(Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.createEmployee(emp);
 	}
 
 	@Override
 	public String deleteEmployee(Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.deleteEmployee(emp);
 	}
 
 	@Override
 	public String updateEmployee(long empId, Employee emp) {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.updateEmployee(empId, emp);
 	}
 
 }

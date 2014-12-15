@@ -18,9 +18,9 @@ public class InventoryControllerTests extends TestCase {
 		InventoryController controller = new InventoryController();
 		SimpleProductManager spm = new SimpleProductManager();
 		spm.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
-		controller.setProductManager(spm);
+		//controller.setProductManager(spm);
 		// controller.setProductManager(new SimpleProductManager());
-		ModelAndView modelAndView = controller.handleRequest(null, null);
+		ModelAndView modelAndView = controller.handleRequest();
 		assertEquals("hello", modelAndView.getViewName());
 		assertNotNull(modelAndView.getModel());
 		Map modelMap = (Map) modelAndView.getModel().get("model");

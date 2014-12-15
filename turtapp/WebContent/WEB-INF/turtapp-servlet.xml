@@ -19,8 +19,6 @@
 			<value>messages</value>
 		</property>
 	</bean>
- 
-	
 	
 	<!-- define the properties file to use -->
 	<context:property-placeholder location="classpath:config.properties" />
@@ -39,6 +37,10 @@
 	<bean id="priceIncreaseValidator" class="turtapp.service.PriceIncreaseValidator"></bean>
 	<bean name="/priceincrease.htm" class="turtapp.web.PriceIncreaseFormController3_0">
 		<property name="productManager" ref="productManager" />
+	</bean>
+	
+	<bean name="/listEmployee.htm" class="turtapp.web.EmployeeController">
+		<property name="employeeManager" ref="employeeManager" />
 	</bean>
 
 	<bean id="viewResolver"

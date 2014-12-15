@@ -13,15 +13,21 @@
 		<fmt:message key="greeting" />
 		<c:out value="${model.now}"></c:out>
 	</p>
-	
+
 	<h3>Products</h3>
 	<c:forEach items="${model.products}" var="prod">
-		 <c:out value="${prod.description}"></c:out>
-		 <i><c:out value="${prod.price}"></c:out>  </i><br/><br/>
+		<c:out value="${prod.description}"></c:out>
+		<i><c:out value="${prod.price}"></c:out> </i>
+		<br />
+		<br />
 	</c:forEach>
-	 <br>
-    <a href="<c:url value="priceincrease.htm"/>">Increase Prices</a>
-    <br>
+	<br>
+	<a href="<c:url value="priceincrease.htm"/>">Increase Prices</a>
+	<br>
+	
+	<br>
+	<a href="<c:url value="listEmployee.htm"/>">Employee</a>
+	<br>
 </body>
 
 </html>

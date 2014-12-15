@@ -53,21 +53,21 @@ public class JdbcEmployeeDao extends JdbcProductDao implements EmployeeDao {
 				}
 		}
 		return clob.toString();
-	}
+	}	
 
 	@Override
 	public String getAppraisalRemarks(Long empId) throws IOException,
 			SQLException {
-		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(mJdbcTemplate);
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(getJdbcTemplate());
 		simpleJdbcCall
 				.withFunctionName(IRSTConstrants.F_EMP_GET_APPRAISAL_REMARKS)
 				.withoutProcedureColumnMetaDataAccess()
 				.declareParameters(
-						new SqlParameter("IN_EMP_ID", OracleTypes.VARCHAR),
-						new SqlOutParameter("RETURN_VALUE", OracleTypes.CLOB))
+						new SqlOutParameter("RETURN_VALUE", OracleTypes.CLOB),
+						new SqlParameter("IN_EMP_ID", OracleTypes.NUMBER))
 				.compile();
 		MapSqlParameterSource inParam = new MapSqlParameterSource().addValue(
-				"IN_EMP_ID", empId, OracleTypes.VARCHAR);
+				"IN_EMP_ID", empId, OracleTypes.NUMBER);
 		Clob clobRetVal = simpleJdbcCall.executeFunction(Clob.class, inParam);
 		return clobToString(clobRetVal);
 	}
